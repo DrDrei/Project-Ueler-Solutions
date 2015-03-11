@@ -32,7 +32,7 @@ for x in newdata:
 	for i in x:
 		sum += alphDict[i]
 	total += sum * names[x]
-print(total)
+print(totals)
 
 
 #with open(filename, 'r') as filetxt:

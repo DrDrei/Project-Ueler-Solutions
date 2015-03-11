@@ -1,40 +1,46 @@
 import sys 
 import math
 
-alph = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-filename = "Problem022.txt"
-alphDict = {}
-count = 1
-for x in alph: 							# map the alphabet
-	alphDict[x] = count
-	count += 1
-data = []
-newdata = []
-#--------------------------------------------------------
-with open(filename, 'r') as filetxt:	# read from file
-	for line in filetxt:
-		data = line.split(",")			# split the line into "NAME-X"
-	for x in data:
-		newdata.append(x[1:-1]) 		# format data
-		newdata.sort()
-#--------------------------------------------------------
-count = 1
-names = {}
-for x in newdata:						# map the names to corresponding numbers	
-	names[x] = count
-	count += 1
 
-#--------------------------------------------------------
-mappedData = {}
-total = 0
-for x in newdata:
-	sum = 0
-	for i in x:
-		sum += alphDict[i]
-	total += sum * names[x]
-print(total)
+def factors(number):
+	factor_list = []
+	for i in range(1,round(number/2+1)):
+		if not (number % i):
+			factor_list.append(i)
+	return factor_list
+
+print("finding factors")
+total = []
+for i in range(1, 23123):
+	number = factors(i)
+	if sum(number) > i:
+		total.append(i)
+
+print("finding sums of abundant numbers")
+sum_of_abund = []
+buffer = total
+for x in total:
+	for y in buffer:
+		if x+y < 23123:
+			sum_of_abund.append(x+y)
+	buffer.pop()
+
+print("removing duplicates")
+new = []
+for i in sum_of_abund:
+	if i not in new:
+		new.append(i)
+print("creating clean array")
+non_abund = []
+for x in range(1,23123):
+	non_abund.append(x)
+
+print("removing sums of abundant numbers from clean array")
+for x in new:
+	try:
+		non_abund.remove(x)
+	except:
+		pass
 
 
-#with open(filename, 'r') as filetxt:
-#	for line in filetxt:
-#		print("hi")
+print(sum(non_abund))
