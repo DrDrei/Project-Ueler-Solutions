@@ -12,10 +12,10 @@ def memoize(bad_f):
 		return bad_f.memo[my_key]
 	return good_f
 
-@memoize
+
 def sums(number):
 	factors = []
-	for i in range(1,number):
+	for i in range(1,round(number/2+1)):
 		if not (number % i):
 			factors.append(i)
 	return factors
